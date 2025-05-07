@@ -1,0 +1,54 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "product_name": "Iphone 16 Pro 256Gb",
+        "description": "iPhone 16 Pro — флагманская модель, которая вывела на новый уровень возможности камеры смартфона. Во многом это обеспечено использованием искусственного интеллекта. ",
+        "image": "",
+        "category": 1,
+        "price": 125000,
+        "created_at": "2025-05-04T12:50:58.173Z",
+        "updated_at": "2025-05-04T14:26:56.093Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "product_name": "Samsung Galaxy S25 Ultra 12/256 Гб",
+        "description": "Samsung Galaxy S25 Ultra 5G Dual sim — новинка 2025 года, которая порадует отличным набором камер, высокой производительностью и эффектным дизайном.",
+        "image": "",
+        "category": 1,
+        "price": 124990,
+        "created_at": "2025-05-04T12:54:34.597Z",
+        "updated_at": "2025-05-04T12:54:34.597Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "product_name": "Телевизор Samsung QE65QN800DUXRU 8K QLED",
+        "description": "Телевизор Samsung QE65QN800DUXRU работает на операционной системе Tizen. Экран форматом 16:9 и диагональю 65\" (163 см) оснащен технологией QLED, HDR, HDMI ARC.",
+        "image": "",
+        "category": 2,
+        "price": 229890,
+        "created_at": "2025-05-04T13:40:30.154Z",
+        "updated_at": "2025-05-04T13:40:30.154Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "product_name": "Телевизор LG OLED65G4RLA 65\" 4K",
+        "description": "Тип экрана: 4K OLED, Разрешение экрана: 4K Ultra HD (3840 x 2160)",
+        "image": "",
+        "category": 2,
+        "price": 262000,
+        "created_at": "2025-05-04T13:44:58.096Z",
+        "updated_at": "2025-05-04T13:44:58.096Z"
+    }
+}
+]

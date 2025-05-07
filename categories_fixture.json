@@ -1,0 +1,18 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "category_name": "Смартфоны",
+        "description": "Флагманы рынка смартфонов"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "category_name": "Телевизоры",
+        "description": "Лучшие модели современных телевизоров"
+    }
+}
+]
