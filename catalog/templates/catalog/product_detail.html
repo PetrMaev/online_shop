@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>О продукте</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">О продукте</h1>
+            <ul class="list-group">
+                <p>Наименование: {{ product_name }}</p>
+                <p>Описание: {{ description }}</p>
+                <p>Цена: {{ price }}</p>
+                <p>Фотография: <img src="{{ product.photo.url }}" alt="{{ product.product_name }}"></p>
+            </ul>
+    </div>
+</body>
+</html>
