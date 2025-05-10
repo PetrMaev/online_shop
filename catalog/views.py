@@ -25,6 +25,7 @@ def product_detail(request, pk):
     context = {
         'product_name': product.product_name,
         'description': product.description,
+        'image': product.image,
         'price': product.price,
     }
     return render(request, 'catalog/product_detail.html', context=context)
