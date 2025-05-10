@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-
+{% load news_tags %}
 {% block title %}О продукте{% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
         <div class="card border-light mb-3 md-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="/static/images/{% if 'Iphone' in product_name %}Iphone 16.png {% elif 'Ultra' in product_name %}S25 Ultra.png {% elif 'QE65QN800DUXRU' in product_name %}Samsung TV.png {% elif 'LG OLED65G4RLA' in product_name %}LG TV.png {% endif %}" class="img-fluid rounded-start" alt="unnamed_box">
+                    <img src="{{ image | media_filter }}" class="img-fluid rounded-start" alt="unnamed_box">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

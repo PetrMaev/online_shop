@@ -1,5 +1,5 @@
 {% extends 'catalog/base.html' %}
-
+{% load news_tags %}
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
@@ -14,10 +14,10 @@
         <div class="row row-cols-2 row-cols-md-1 g-4">
             <div class="col">
                 <div class="card text-center border-light mb-5" style="max-width: 18rem;">
-                    <img src="/static/images/{% if 'Iphone' in product.product_name %}Iphone 16.png {% elif 'Ultra' in product.product_name %}S25 Ultra.png {% elif 'QE65QN800DUXRU' in product.product_name %}Samsung TV.png {% elif 'LG OLED65G4RLA' in product.product_name %}LG TV.png {% endif %}" class="card-img-top" alt="unnamed_box">
+                    <img src="{{ product.image | media_filter }}" class="card-img-top" alt="unnamed_box">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.product_name|truncatechars:30 }}</h5>
-                        <p class="card-text">{{ product.description|truncatechars:25 }}</p>
+                        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
                         <a href="/product_detail/{{ product.id }}"><button type="submit" class="btn btn-primary w-100">Подробнее</button></a>
                     </div>
                 </div>
