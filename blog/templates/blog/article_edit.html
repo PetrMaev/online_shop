@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Редактирование статьи{% endblock %}
+
+{% block content %}
+<h2>Редактирование статьи</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'blog:article_detail' article.pk %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
