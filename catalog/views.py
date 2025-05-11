@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+
+from .models import Product, Category
 
 
 def home_page(request):
-    return render(request, 'catalog/home.html')
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'catalog/home.html', context=context)
 
 
 def contacts_page(request):
@@ -14,3 +18,26 @@ def contacts_page(request):
 
         return HttpResponse(f"Спасибо {name}! Сообщение отправлено.")
     return render(request, 'catalog/contacts.html')
+
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    context = {
+        'product_name': product.product_name,
+        'description': product.description,
+        'image': product.image,
+        'price': product.price,
+    }
+    return render(request, 'catalog/product_detail.html', context=context)
+
+
+def product_list(request):
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'catalog/product_list.html', context=context)
+
+
+def categories_list(request):
+    categories = Category.objects.all()
+    context = {'categories': categories}
+    return render(request, 'catalog/categories_list.html', context=context)
