@@ -1,43 +1,39 @@
-from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django import forms
+from django.views.generic import DetailView, ListView, FormView
 
 from .models import Product, Category
 
 
-def home_page(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'catalog/home.html', context=context)
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'products'
 
 
-def contacts_page(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        phone_number = request.POST.get("phone_number")
-        message = request.POST.get("message")
-
-        return HttpResponse(f"Спасибо {name}! Сообщение отправлено.")
-    return render(request, 'catalog/contacts.html')
+class ProductDetailVew(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
 
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, id=pk)
-    context = {
-        'product_name': product.product_name,
-        'description': product.description,
-        'image': product.image,
-        'price': product.price,
-    }
-    return render(request, 'catalog/product_detail.html', context=context)
+class CategoriesListVew(ListView):
+    model = Category
+    template_name = 'catalog/categories_list.html'
+    context_object_name = 'categories'
 
 
-def product_list(request):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'catalog/product_list.html', context=context)
+class ContactForm(forms.Form):
+    name = forms.CharField()
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
 
 
-def categories_list(request):
-    categories = Category.objects.all()
-    context = {'categories': categories}
-    return render(request, 'catalog/categories_list.html', context=context)
+class ContactsView(FormView):
+    template_name = 'catalog/contacts.html'
+    form_class = ContactForm
+    success_url = '/contacts/'
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name']
+        return HttpResponse(f'Спасибо {name}! Сообщение отправлено.')
