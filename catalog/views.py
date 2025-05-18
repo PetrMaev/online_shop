@@ -1,8 +1,31 @@
-from django.http import HttpResponse
-from django import forms
-from django.views.generic import DetailView, ListView, FormView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from .models import Product, Category
+from .forms import ProductForm
+from .models import Category, Product
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:home')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_edit.html'
+
+    def get_success_url(self):
+        return reverse('catalog:product_detail', kwargs={'pk': self.object.pk})
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:home')
 
 
 class ProductsListView(ListView):
@@ -23,17 +46,5 @@ class CategoriesListVew(ListView):
     context_object_name = 'categories'
 
 
-class ContactForm(forms.Form):
-    name = forms.CharField()
-    email = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)
-
-
-class ContactsView(FormView):
+class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
-    form_class = ContactForm
-    success_url = '/contacts/'
-
-    def form_valid(self, form):
-        name = form.cleaned_data['name']
-        return HttpResponse(f'Спасибо {name}! Сообщение отправлено.')
