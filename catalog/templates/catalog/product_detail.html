@@ -27,8 +27,14 @@
             </div>
             <div class="card-footer bg-transparent border-success">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="{% url 'catalog:home'%}">
-                        <button type="button" class="btn btn-outline-secondary">Назад</button>
+                    <a href="{% url 'catalog:product_edit' product.pk %}">
+                        <button type="button" class="btn btn-secondary">Редактировать</button>
+                    </a>
+                    <a href="{% url 'catalog:product_delete' product.pk %}">
+                        <button type="button" class="btn btn-danger">Удалить</button>
+                    </a>
+                    <a href="{% url 'catalog:home' %}">
+                        <button type="button" class="btn btn-primary">Вернуться к списку</button>
                     </a>
                 </div>
             </div>
