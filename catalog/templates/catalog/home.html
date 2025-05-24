@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ product.product_name|truncatechars:30 }}</h5>
                         <p class="card-text">{{ product.description|truncatechars:100 }}</p>
-                        <a href="/product_detail/{{ product.id }}"><button type="submit" class="btn btn-primary w-100">Подробнее</button></a>
+                        <a href="{% url 'catalog:product_detail' product.pk %}"><button type="submit" class="btn btn-primary w-100">Подробнее</button></a>
                     </div>
                 </div>
             </div>
