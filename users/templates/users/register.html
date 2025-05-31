@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="mb-5">
+    <p class="text-center h1">Регистрация</p>
+</div>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-6">
+    <h2>Форма регистрации на сайте</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

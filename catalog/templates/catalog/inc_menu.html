@@ -24,11 +24,25 @@
                 <div class="dropdown">
                     <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
+                        {% if user.is_authenticated %}
+                        Пользователь {{ user.email|truncatechars:15 }}
+                        {% else %}
                         Пользователь
+                        {% endif %}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
-                        <li><a class="dropdown-item" href="#">Выход</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'users:user_detail' user.pk %}">Профиль</a></li>
+                        <li>
+                            <form method="post" action="{% url 'users:logout' %}" style="display: inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn">Выход</button>
+                            </form>
+                        </li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'users:login' %}">Вход</a></li>
+                        <li><a class="dropdown-item" href="{% url 'users:register' %}">Регистрация</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
