@@ -3,19 +3,28 @@
             <div class="card-header h4">Меню</div>
             <div class="card-body">
                 <div class="d-grid gap-2 col-12 mx-auto">
-                    <a href="{% url 'catalog:home'%}">
+                    <a href="{% url 'catalog:home' %}">
                         <button type="button" class="btn btn-primary w-100">Главная</button>
                     </a>
-                    <a href="{% url 'catalog:product_create'%}">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'catalog:product_create' %}">
                         <button type="button" class="btn btn-primary w-100">Добавить продукт</button>
                     </a>
-                    <a href="{% url 'catalog:categories_list'%}">
+                    {% endif %}
+                    {% if perms.catalog.can_unpublish_product %}
+                    <a href="{% url 'catalog:product_list_all' %}">
+                        <button type="button" class="btn btn-primary w-100">Все продукты</button>
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'catalog:categories_list' %}">
                         <button type="button" class="btn btn-primary w-100">Категории</button>
                     </a>
+                    {% if user.is_authenticated %}
                     <a href="#">
                         <button type="button" class="btn btn-primary w-100">Заказы</button>
                     </a>
-                    <a href="{% url 'catalog:contacts'%}">
+                    {% endif %}
+                    <a href="{% url 'catalog:contacts' %}">
                         <button type="button" class="btn btn-primary w-100">Контакты</button>
                     </a>
                 </div>
