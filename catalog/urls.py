@@ -4,7 +4,7 @@ from catalog.apps import CatalogConfig
 
 from .views import (CategoriesListVew, ContactsView, ProductCreateView,
                     ProductDeleteView, ProductDetailVew, ProductsListView,
-                    ProductUpdateView)
+                    ProductUpdateView, ProductsAllListView)
 
 app_name = CatalogConfig.name
 
@@ -15,5 +15,6 @@ urlpatterns = [
     path("catalog/<int:pk>/delete/", ProductDeleteView.as_view(), name="product_delete"),
     path("catalog/contacts/", ContactsView.as_view(), name="contacts"),
     path("catalog/product_detail/<int:pk>/", ProductDetailVew.as_view(),name="product_detail"),
+    path("catalog/product_list_all/", ProductsAllListView.as_view(),name="product_list_all"),
     path("catalog/categories_list/", CategoriesListVew.as_view(), name="categories_list"),
 ]
