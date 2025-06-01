@@ -6,11 +6,9 @@
                     <a href="{% url 'catalog:home' %}">
                         <button type="button" class="btn btn-primary w-100">Главная</button>
                     </a>
-                    {% if user.is_authenticated %}
                     <a href="{% url 'catalog:product_create' %}">
                         <button type="button" class="btn btn-primary w-100">Добавить продукт</button>
                     </a>
-                    {% endif %}
                     {% if perms.catalog.can_unpublish_product %}
                     <a href="{% url 'catalog:product_list_all' %}">
                         <button type="button" class="btn btn-primary w-100">Все продукты</button>
