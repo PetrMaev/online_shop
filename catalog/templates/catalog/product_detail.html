@@ -27,16 +27,24 @@
             </div>
             <div class="card-footer bg-transparent border-success">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    {% if perms.catalog.can_unpublish_product or user == product.owner %}
                     <a href="{% url 'catalog:product_edit' product.pk %}">
                         <button type="button" class="btn btn-secondary">Редактировать</button>
                     </a>
+                    {% endif %}
+                    {% if perms.catalog.delete_product or user == product.owner %}
                     <a href="{% url 'catalog:product_delete' product.pk %}">
                         <button type="button" class="btn btn-danger">Удалить</button>
                     </a>
+                    {% endif %}
                     <a href="{% url 'catalog:home' %}">
                         <button type="button" class="btn btn-primary">Вернуться к списку</button>
                     </a>
                 </div>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <p class="text-center h6">Дата публикации: {{ product.created_at|date:"H:m d M Y" }}</p>
+                <p class="text-center h6">Опубликовано: {{ product.owner }}</p>
             </div>
         </div>
     </div>
