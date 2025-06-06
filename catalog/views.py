@@ -17,10 +17,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
-        product = form.save()
-        user = self.request.user
-        product.owner = user
-        product.save()
+        form.instance.owner = self.request.user
         return super().form_valid(form)
 
 
