@@ -35,7 +35,8 @@ class CustomLoginView(LoginView):
 
 
 class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy('catalog:home')
+    def get_next_page(self):
+        return reverse_lazy('catalog:home')
 
 
 class UserDetailVew(DetailView):
