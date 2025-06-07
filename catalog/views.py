@@ -69,7 +69,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 @method_decorator(cache_page(60), name='dispatch')
 class ProductsListView(ListView):
     model = Product
-    template_name = 'catalog/home.html'
+    template_name = 'catalog/product_list.html'
     context_object_name = 'products'
 
     def get_queryset(self):
@@ -95,7 +95,7 @@ class ProductsAllListView(ListView):
 
 class CategoriesListView(ListView):
     model = Category
-    template_name = 'catalog/categories_list.html'
+    template_name = 'catalog/home.html'
     context_object_name = 'categories'
 
 
@@ -106,7 +106,7 @@ class CategoryDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category_id = self.request.GET.get('category_id')
+        category_id = self.kwargs.get('category_id')
         if category_id:
             context['products'] = get_products_by_category(category_id)
         return context
