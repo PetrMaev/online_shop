@@ -1,15 +1,10 @@
 {% extends 'catalog/base.html' %}
 {% load news_tags %}
-{% block title %}Главная страница{% endblock %}
+{% block title %}Список продуктов{% endblock %}
 
 {% block content %}
 <div class="mb-5">
-    <p class="text-center h1">Главная</p>
-    {% if user.is_authenticated %}
-    <p class="text-center">Здравствуйте, {{ user.email }} ! Вы находитесь на сайте продажи товаров</p>
-    {% else %}
-    <p class="text-center">Добро пожаловать на сайт продажи товаров!</p>
-    {% endif %}
+    <p class="text-center h1">Список продуктов</p>
 </div>
 <div class="row">
     {% for product in products %}
