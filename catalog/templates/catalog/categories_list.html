@@ -13,10 +13,10 @@
         <div class="card">
             <img src="/static/images/{% if category.category_name == 'Смартфоны' %}smartphones.jpg {% elif category.category_name == 'Телевизоры' %}TVs.jpg {% endif %}" class="card-img-top" alt="unnamed_box">
             <div class="card-body">
-                <h5 class="card-title">{{category.category_name}}</h5>
-                <p class="card-text">{{category.description}}</p>
+                <h5 class="card-title">{{ category.category_name }}</h5>
+                <p class="card-text">{{ category.description }}</p>
                 <div class="card-footer bg-transparent border-success">
-                    <a href="#"><button type="button" class="btn btn-outline-primary">View</button></a>
+                    <a href="{% url 'catalog:category_detail' category.id %}"><button type="button" class="btn btn-outline-primary">View</button></a>
                     <a href="#"><button type="button" class="btn btn-outline-primary">Edit</button></a>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 {% extends 'catalog/base.html' %}
 {% load news_tags %}
-{% block title %}Список продуктов{% endblock %}
+{% block title %}Главная страница{% endblock %}
 
 {% block content %}
 <div class="mb-5">
-    <p class="text-center h1">Список продуктов</p>
+    <p class="text-center h1">{{ category.category_name }}</p>
+    <p class="text-center h4">{{ category.description }}</p>
 </div>
 <div class="row">
     {% for product in products %}

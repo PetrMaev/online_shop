@@ -5,9 +5,13 @@ from django.shortcuts import render
 from django.http import HttpResponseForbidden
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.core.cache import cache
 
 from .forms import ProductForm
 from .models import Category, Product
+from .services import get_products_by_category
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -62,16 +66,21 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
         return HttpResponseForbidden(render(request, '403.html'))
 
 
+@method_decorator(cache_page(60), name='dispatch')
 class ProductsListView(ListView):
     model = Product
-    template_name = 'catalog/home.html'
+    template_name = 'catalog/product_list.html'
     context_object_name = 'products'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = cache.get('products_queryset')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('products_queryset', queryset, 60)
         return queryset.filter(is_publish=True)
 
 
+@method_decorator(cache_page(60), name='dispatch')
 class ProductDetailVew(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
@@ -84,10 +93,23 @@ class ProductsAllListView(ListView):
     context_object_name = 'products'
 
 
-class CategoriesListVew(ListView):
+class CategoriesListView(ListView):
     model = Category
-    template_name = 'catalog/categories_list.html'
+    template_name = 'catalog/home.html'
     context_object_name = 'categories'
+
+
+class CategoryDetailView(ListView):
+    model = Product
+    template_name = 'catalog/category_detail.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get('category_id')
+        if category_id:
+            context['products'] = get_products_by_category(category_id)
+        return context
 
 
 class ContactsView(TemplateView):
